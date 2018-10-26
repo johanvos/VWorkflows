@@ -37,6 +37,16 @@ apply plugin: 'application'
 
 mainClassName= 'eu.mihosoft.vrl.workflow.demo.Main'
 
+run {
+    doFirst {
+        jvmArgs += [
+                '--module-path', project.file("$JAVAFX_SDK/lib").absolutePath,
+                '--add-modules', 'javafx.controls,javafx.fxml',
+                '--add-opens', 'javafx.fxml/javafx.fxml=ALL-UNNAMED'
+        ]
+    }
+}
+
 //javafx {
 //    mainClass = mainClassName
 //}
