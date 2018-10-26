@@ -40,6 +40,9 @@ apply from: 'gradle/jdkdetect.gradle'
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
 
     dependencies {
@@ -49,12 +52,15 @@ buildscript {
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
         classpath 'net.nemerosa:versioning:2.5.0'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath 'gradle.plugin.org.javamodularity:moduleplugin:1.1.0'
+        classpath 'com.google.gradle:osdetector-gradle-plugin:1.6.0'
     }
 }
 
 apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'net.nemerosa.versioning'
+apply plugin: 'com.google.osdetector'
 
 Date buildTimeAndDate = new Date()
 ext {
@@ -68,6 +74,7 @@ ext {
     jacocoRootReportPath = "${buildDir}/reports/jacoco/root/"
     projectsWithCoverage = []
     projectsToPublish = []
+    platform = osdetector.os == 'osx' ? 'mac' : osdetector.os == 'windows' ? 'win' : osdetector.os
 }
 
 jacoco {
@@ -85,6 +92,7 @@ allprojects {
     apply plugin: 'idea'
     apply plugin: 'eclipse'
     apply plugin: 'com.github.ben-manes.versions'
+    apply plugin: 'org.javamodularity.moduleplugin'
 
     repositories {
         jcenter()

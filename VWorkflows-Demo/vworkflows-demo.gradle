@@ -43,4 +43,6 @@ mainClassName= 'eu.mihosoft.vrl.workflow.demo.Main'
 
 dependencies {
     compile project(':vworkflows-fx') 
+    compile "org.openjfx:javafx-fxml:$jfxVersion:$platform"
+    compile "org.openjfx:javafx-swing:$jfxVersion:$platform"
 }

@@ -33,10 +33,20 @@
  */
 
 dependencies {
-    compile "com.thoughtworks.xstream:xstream:$xstreamVersion"
-    compile "net.sf.jung:jung-api:$jungVersion"
-    compile "net.sf.jung:jung-graph-impl:$jungVersion"
-    compile "net.sf.jung:jung-algorithms:$jungVersion"
-    compile "net.sf.jung:jung-visualization:$jungVersion"
+    compile ("com.thoughtworks.xstream:xstream:$xstreamVersion") {
+        exclude group: 'xmlpull', module: 'xmlpull'
+    }
+    // compile "net.sf.jung:jung-api:$jungVersion"
+    compile ("net.sf.jung:jung-graph-impl:$jungVersion") {
+        exclude group: 'edu.uci.ics.jung.graph.util', module: 'edu.uci.ics.jung.graph.util'
+    }
+    compile ("net.sf.jung:jung-algorithms:$jungVersion") {
+        exclude group: 'net.sf.jung', module: 'jung-api'
+    }
+    compile ("net.sf.jung:jung-visualization:$jungVersion") {
+        exclude group: 'net.sf.jung', module: 'jung-api'
+    }
     compile "org.apache.commons:commons-collections4:$commonsCollections4Version"
+    compile "org.openjfx:javafx-base:$jfxVersion:$platform"
+    compile "org.openjfx:javafx-graphics:$jfxVersion:$platform"
 }
